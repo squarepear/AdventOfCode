@@ -1,24 +1,25 @@
-import { readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 
-export function readInput(): string[] {
-    const filePath = join(import.meta.dir, '../../Day1/input.txt');
-
-    return readFileSync(filePath, 'utf8').split('\n');
+let dir = ''
+export function setDir(newDir: string) {
+    dir = join(newDir, '../')
 }
 
-export function readInputAsNumbers(): number[] {
-    return readInput().map((line) => parseInt(line, 10));
+export function readInput(): string {
+    const filePath = join(dir, 'input.txt')
+
+    return readFileSync(filePath, 'utf8')
 }
 
 export function saveOutputPart1(output: any): void {
-    const filePath = join(import.meta.dir, '../../Day1/output-part1.txt');
+    const filePath = join(dir, 'output-part1.txt')
 
-    writeFileSync(filePath, output.toString());
+    writeFileSync(filePath, output.toString())
 }
 
 export function saveOutputPart2(output: any): void {
-    const filePath = join(import.meta.dir, '../../Day1/output-part2.txt');
+    const filePath = join(dir, 'output-part2.txt')
 
-    writeFileSync(filePath, output.toString());
+    writeFileSync(filePath, output.toString())
 }

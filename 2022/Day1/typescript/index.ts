@@ -1,54 +1,52 @@
-import { readInput, saveOutputPart1, saveOutputPart2 } from '../../util/typescript';
+import { readInput, saveOutputPart1, saveOutputPart2, setDir } from '../../util/typescript'
+
+setDir(import.meta.dir)
+const input = readInput().split('\n')
 
 function part1() {
-    const input = readInput();
-    let output = 0;
+    let output = 0
     let current = 0
 
     for (const line of input) {
         if (line == '') {
-            current = 0;
+            current = 0
             continue
         }
 
-        current += parseInt(line, 10);
+        current += parseInt(line, 10)
 
         if (current > output)
-            output = current;
+            output = current
     }
 
-    saveOutputPart1(output);
+    saveOutputPart1(output)
 }
 
 
 function part2() {
-    const input = readInput();
-    let output = 0;
+    let output = 0
     let top = [0, 0, 0]
     let current = 0
 
     for (const line of input) {
         if (line != '') {
-            current += parseInt(line, 10);
-
+            current += parseInt(line, 10)
             continue
         }
 
-        top.sort((a, b) => a - b);
+        top.sort((a, b) => a - b)
 
-        if (current > top[0]) {
-            top[0] = current;
-        } else if (current > top[1]) {
-            top[1] = current;
-        } else if (current > top[2]) {
-            top[2] = current;
-        }
+        if (current > top[0])
+            top[0] = current
         
-        current = 0;
+        current = 0
     }
 
-    saveOutputPart2(top[0] + top[1] + top[2]);
+    output = top.reduce((a, b) => a + b, 0)
+
+    saveOutputPart2(output)
 }
 
-part1();
-part2();
+
+part1()
+part2()
