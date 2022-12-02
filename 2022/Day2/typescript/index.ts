@@ -4,58 +4,55 @@ setDir(import.meta.dir)
 const input = readInput()
 
 function part1() {
-    let output = 0
-
+    const other = ['A', 'B', 'C']
     const you = ['X', 'Y', 'Z']
-    const them = ['A', 'B', 'C']
 
-    input.trim().split('\n').forEach((line) => {
-        let move = line.split(' ')
+    const output = input.trim().split('\n').map((line) => {
+        const otherIndex = other.indexOf(line[0])
+        const youIndex = you.indexOf(line[2])
 
-        let youIndex = you.indexOf(move[1])
-        let themIndex = them.indexOf(move[0])
+        let out = youIndex + 1
 
-        output += youIndex + 1
+        if (youIndex == (otherIndex + 1) % 3)
+            out += 6
+        else if (youIndex == otherIndex)
+            out += 3
 
-        if (youIndex == themIndex + 1 || (youIndex == 0 && themIndex == 2))
-            output += 6
-        else if (youIndex == themIndex)
-            output += 3
-    })
+        return out
+    }).reduce((a, b) => a + b, 0)
 
     saveOutputPart1(output)
 }
 
 
 function part2() {
-    let output = 0
-
+    const other = ['A', 'B', 'C']
     const you = ['X', 'Y', 'Z']
-    const them = ['A', 'B', 'C']
 
-    input.trim().split('\n').forEach((line) => {
-        let move = line.split(' ')
-
-        let result = you.indexOf(move[1])
-        let themIndex = them.indexOf(move[0])
+    const output = input.trim().split('\n').map((line) => {
+        const result = you.indexOf(line[2])
+        const otherIndex = other.indexOf(line[0])
         let youIndex = 0
 
+        
         if (result == 0)
-            youIndex = themIndex - 1
+            youIndex = otherIndex - 1
         else if (result == 1)
-            youIndex = themIndex
+            youIndex = otherIndex
         else if (result == 2)
-            youIndex = themIndex + 1
-
+            youIndex = otherIndex + 1
+        
         youIndex = (youIndex + 3) % 3
+        
+        let out = youIndex + 1
+        
+        if (youIndex == (otherIndex + 1) % 3)
+            out += 6
+        else if (youIndex == otherIndex)
+            out += 3
 
-        output += youIndex + 1
-
-        if (youIndex == themIndex + 1 || (youIndex == 0 && themIndex == 2))
-            output += 6
-        else if (youIndex == themIndex)
-            output += 3
-    })
+        return out
+    }).reduce((a, b) => a + b, 0)
 
     saveOutputPart2(output)
 }
