@@ -5,10 +5,12 @@ import (
 	"os"
 
 	"github.com/squarepear/aoc/2025/day1"
+	"github.com/squarepear/aoc/2025/day2"
 )
 
 var Days = map[int]func() error{
 	1: day1.Execute,
+	2: day2.Execute,
 }
 
 func main() {
