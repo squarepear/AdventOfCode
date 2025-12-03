@@ -5,17 +5,19 @@
   inputs.devshell.url = "github:numtide/devshell";
 
   outputs = { self, nixpkgs, flake-utils, devshell }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [ devshell.overlay ];
-      };
-    in {
-      devShell = pkgs.devshell.mkShell {
-        name = "aoc-2022";
-        packages = builtins.attrValues {
-          inherit (pkgs) bun;
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ devshell.overlay ];
         };
-      };
-    });
+      in
+      {
+        devShell = pkgs.devshell.mkShell {
+          name = "aoc-2022";
+          packages = builtins.attrValues {
+            inherit (pkgs) bun;
+          };
+        };
+      });
 }
