@@ -3,9 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/squarepear/aoc/2025/day1"
 )
 
-var Days = map[int]func() error{}
+var Days = map[int]func() error{
+	1: day1.Execute,
+}
 
 func main() {
 	args := os.Args
@@ -22,6 +26,7 @@ func main() {
 	}
 
 	if execute, exists := Days[day]; exists {
+		fmt.Println("Executing Day", day)
 		err := execute()
 		if err != nil {
 			fmt.Printf("Error executing day %d: %v\n", day, err)
